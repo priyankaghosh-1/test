@@ -1,0 +1,23 @@
+#include <DFRobot_SoilMoisture.h>
+// Initialize the sensor on analog pin A0
+DFRobot_SoilMoisture soilMoistureSensor(A0);
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Soil Moisture Sensor Example with Library");
+  soilMoistureSensor.begin(); // Initialize sensor library (optional, depending on library version)
+}
+void loop() {
+  // Read moisture percentage (0 - 100%)
+  int moisturePercent = soilMoistureSensor.readPercent();
+  Serial.print("Soil Moisture: ");
+  Serial.print(moisturePercent);
+  Serial.println(" %");
+  // Simple threshold check example
+  if(moisturePercent < 30){
+    Serial.println("Warning: Soil is dry!");
+  } else {
+    Serial.println("Soil moisture is adequate.");
+  }
+  Serial.println();
+  delay(2000); // Wait 2 seconds before next read
+}
